@@ -29,6 +29,12 @@ class Hero:
         total_block += armour.block()
     return total_block
 
+  def take_damage(self, damage):
+    defence = self.defend()
+    # If the damage is greater than the defence, subtract the net damage from current health
+    if damage > defence:
+      self.current_health -= damage - defence
+
 
 
     
