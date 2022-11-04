@@ -6,6 +6,9 @@ class Hero:
     self.starting_health = starting_health
     self.current_health = starting_health
 
+  def add_ability(ability):
+    pass
+
     
   def fight(self, opponent):
     random_num = random.randint(0, 99)
