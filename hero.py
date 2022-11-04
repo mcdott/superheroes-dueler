@@ -35,7 +35,11 @@ class Hero:
     if damage > defence:
       self.current_health -= damage - defence
 
-
+  def is_alive(self):
+    if self.current_health > 0:
+      return True
+    else:
+      return False
 
     
   def fight(self, opponent):
@@ -60,15 +64,21 @@ if __name__ == "__main__":
 
     # hero1.fight(hero2)
 
-    debugging = Ability("Great Debuggin", 50)
-    intelligence = Ability("Intelligence", 90)
-    hero = Hero("Grace Hopper", 200)
-    hero.add_ability(debugging)
-    hero.add_ability(intelligence)
-    print(f'Attack: {hero.attack()}')
+    # debugging = Ability("Great Debuggin", 50)
+    # intelligence = Ability("Intelligence", 90)
+    # hero = Hero("Grace Hopper", 200)
+    # hero.add_ability(debugging)
+    # hero.add_ability(intelligence)
+    # print(f'Attack: {hero.attack()}')
 
-    persistence = Armour("Persistence", 75)
-    self_confidence = Armour("Self-confidence", 50)
-    hero.add_armour(persistence)
-    hero.add_armour(self_confidence)
-    print(f'Defence: {hero.defend()}')
+    # persistence = Armour("Persistence", 75)
+    # self_confidence = Armour("Self-confidence", 50)
+    # hero.add_armour(persistence)
+    # hero.add_armour(self_confidence)
+    # print(f'Defence: {hero.defend()}')
+
+    hero = Hero("Grace Hopper", 200)
+    hero.take_damage(150)
+    print(hero.is_alive())
+    hero.take_damage(15000)
+    print(hero.is_alive())
