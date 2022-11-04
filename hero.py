@@ -43,14 +43,27 @@ class Hero:
 
     
   def fight(self, opponent):
-    random_num = random.randint(0, 99)
-    opponents_chance_of_winning_percentage = opponent.current_health/(opponent.current_health + self.current_health) * 100
-
-    # If the random number is less than the opponents chance of winning, the opponent wins
-    if random_num < opponents_chance_of_winning_percentage:
-      print(f"{opponent.name} defeats {self.name}!")
+    if len(self.abilities) == 0 and len(opponent.abilities) == 0:
+      print("Draw")
     else:
-      print(f"{self.name} defeats {opponent.name}!")
+      while self.current_health > 0 and opponent.current_health > 0:
+        damage_to_opponent = self.attack()
+        opponent.take_damage(damage_to_opponent)
+        if opponent.current_health <= 0:
+          print(f'{self.name} won!')
+        damage_to_self = opponent.attack()
+        self.take_damage(damage_to_self)
+        if self.current_health <= 0:
+          print(f'{opponent.name} won!')
+
+    # Chapter2:
+    # random_num = random.randint(0, 99)
+    # opponents_chance_of_winning_percentage = opponent.current_health/(opponent.current_health + self.current_health) * 100
+    # If the random number is less than the opponents chance of winning, the opponent wins
+    # if random_num < opponents_chance_of_winning_percentage:
+    #   print(f"{opponent.name} defeats {self.name}!")
+    # else:
+    #   print(f"{self.name} defeats {opponent.name}!")
 
 
 if __name__ == "__main__":
@@ -77,8 +90,20 @@ if __name__ == "__main__":
     # hero.add_armour(self_confidence)
     # print(f'Defence: {hero.defend()}')
 
-    hero = Hero("Grace Hopper", 200)
-    hero.take_damage(150)
-    print(hero.is_alive())
-    hero.take_damage(15000)
-    print(hero.is_alive())
+    # hero = Hero("Grace Hopper", 200)
+    # hero.take_damage(150)
+    # print(hero.is_alive())
+    # hero.take_damage(15000)
+    # print(hero.is_alive())
+
+    hero1 = Hero("Wonder Woman")
+    hero2 = Hero("Dumbledore")
+    ability1 = Ability("Super Speed", 300)
+    ability2 = Ability("Super Eyes", 130)
+    ability3 = Ability("Wizard Wand", 80)
+    ability4 = Ability("Wizard Beard", 20)
+    hero1.add_ability(ability1)
+    hero1.add_ability(ability2)
+    hero2.add_ability(ability3)
+    hero2.add_ability(ability4)
+    hero1.fight(hero2)
