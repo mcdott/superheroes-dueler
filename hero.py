@@ -10,6 +10,8 @@ class Hero:
     self.name = name
     self.starting_health = starting_health
     self.current_health = starting_health
+    self.deaths = 0
+    self.kills = 0
 
   def add_ability(self, ability):
     self.abilities.append(ability)
@@ -61,10 +63,26 @@ class Hero:
         # If at least one player has died, print the outcome of the fight
         if self.current_health <= 0 and opponent.current_health <= 0:
           print("Draw")
+          self.add_kill(1)
+          opponent.add_kill(1)
+          self.add_death(1)
+          opponent.add_death(1)
         elif opponent.current_health <= 0:
           print(f'{self.name} won!')
+          self.add_kill(1)
+          opponent.add_death(1)
         elif self.current_health <= 0:
           print(f'{opponent.name} won!')
+          opponent.add_kill(1)
+          self.add_death(1)
+
+  def add_kill(self, num_kills):
+    ''' Update self.kills by num_kills amount'''
+    self.kills += num_kills
+
+  def add_death(self, num_deaths):
+    ''''Update deaths with num_deaths'''
+    self.deaths += num_deaths
 
 
 if __name__ == "__main__":
