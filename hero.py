@@ -72,5 +72,5 @@ if __name__ == "__main__":
     hero = Hero("Wonder Woman")
     weapon = Weapon("Lasso of Truth", 90)
     hero.add_weapon(weapon)
-    print(hero.attack())
+    print(hero.attack()) 
    
