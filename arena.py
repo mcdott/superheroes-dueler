@@ -79,6 +79,24 @@ class Arena:
     '''Battle team_one and team_two together.'''
     self.team_one.attack(self.team_two)
 
+  def average_kills_over_deaths(self, team):
+    '''Calculates the average k/d for a given team'''
+    team_kills = 0
+    team_deaths = 0
+    for hero in team.heroes:
+        team_kills += hero.kills
+        team_deaths += hero.deaths
+    if team_deaths == 0:
+        team_deaths = 1
+    team_kills_over_deaths = round(team_kills/team_deaths, 2)
+    return (f'{team.name} average K/D was: {team_kills_over_deaths}')
+
+  def print_surviving_hero_list(self, team_name, heroes):
+    '''Print a list of the heroes on a team who survived'''
+    for hero in heroes:
+      if hero.deaths == 0:
+        print("survived from " + team_name + ": " + hero.name)
+
   def show_stats(self):
     '''Prints team statistics to terminal.'''
     print("\n")
@@ -88,42 +106,32 @@ class Arena:
     print(self.team_two.name + " statistics: ")
     self.team_two.stats()
     print("\n")
-
-    # Calculate and display the average K/D for Team One
-    team_kills = 0
-    team_deaths = 0
-    for hero in self.team_one.heroes:
-        team_kills += hero.kills
-        team_deaths += hero.deaths
-    if team_deaths == 0:
-        team_deaths = 1
-    print(self.team_one.name + " average K/D was: " + str(team_kills/team_deaths))
-
-    # Calculate and display the average K/D for Team Two
-    team_kills = 0
-    team_deaths = 0
-    for hero in self.team_two.heroes:
-        team_kills += hero.kills
-        team_deaths += hero.deaths
-    if team_deaths == 0:
-        team_deaths = 1
-    print(self.team_two.name + " average K/D was: " + str(team_kills/team_deaths))
-   
-
-    # List the heroes from Team One that survived
-    for hero in self.team_one.heroes:
-        if hero.deaths == 0:
-            print("survived from " + self.team_one.name + ": " + hero.name)
-
-    # List the heroes from Team Two that survived
-    for hero in self.team_two.heroes:
-        if hero.deaths == 0:
-            print("survived from " + self.team_two.name + ": " + hero.name)
-    
+    print(self.average_kills_over_deaths(self.team_one))
+    print(self.average_kills_over_deaths(self.team_two))
+    self.print_surviving_hero_list(self.team_one.name, self.team_one.heroes)
+    self.print_surviving_hero_list(self.team_two.name, self.team_two.heroes)
 
 if __name__ == "__main__":
-    arena = Arena()
-    arena.build_team_one()
-    arena.build_team_two()
-    arena.team_battle()
-    arena.show_stats()
+  game_is_running = True
+
+  # Instantiate Game Arena
+  arena = Arena()
+
+  #Build Teams
+  arena.build_team_one()
+  arena.build_team_two()
+
+  while game_is_running:
+
+      arena.team_battle()
+      arena.show_stats()
+      play_again = input("Play Again? Y or N: ")
+
+      #Check for Player Input
+      if play_again.lower() == "n":
+          game_is_running = False
+
+      else:
+          #Revive heroes to play again
+          arena.team_one.revive_heroes()
+          arena.team_two.revive_heroes()
