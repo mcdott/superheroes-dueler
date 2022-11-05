@@ -6,6 +6,7 @@ class Ability:
         self.max_damage = max_damage
 
     def attack(self):
+        # An ability's damage is a random number between 0 and its max damage
         random_value = random.randint(0, self.max_damage)
         return random_value
 
