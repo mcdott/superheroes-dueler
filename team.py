@@ -52,16 +52,16 @@ class Team:
             living_opponents.append(hero)
 
         while len(living_heroes) > 0 and len(living_opponents) > 0:
-        # Randomly select a living hero from each team
-        chosen_hero = random.choice(living_heroes)
-        chosen_opponent = random.choice(living_opponents)
-        chosen_hero.fight(chosen_opponent)
+            # Randomly select a living hero from each team
+            chosen_hero = random.choice(living_heroes)
+            chosen_opponent = random.choice(living_opponents)
+            chosen_hero.fight(chosen_opponent)
   
-        # Update living_heroes and living_opponents to reflect the result of the fight
-        if not chosen_hero.is_alive():
-            living_heroes.remove(chosen_hero)
-        if not chosen_opponent.is_alive():
-            living_opponents.remove(chosen_opponent)
+            # Update living_heroes and living_opponents to reflect the result of the fight
+            if not chosen_hero.is_alive():
+                living_heroes.remove(chosen_hero)
+            if not chosen_opponent.is_alive():
+                living_opponents.remove(chosen_opponent)
 
   
 
