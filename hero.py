@@ -4,6 +4,10 @@ from armour import Armour
 from weapon import Weapon
 
 class Hero:
+  '''
+  Contains methods to define the characteristics of a hero 
+  as well as a method for a hero to fight another hero
+  '''
   def __init__(self, name, starting_health=100):
     self.abilities = list()
     self.armour = list()
@@ -14,23 +18,26 @@ class Hero:
     self.kills = 0
 
   def add_ability(self, ability):
+    '''Adds an ability to the hero's list of abilities'''
     self.abilities.append(ability)
 
-  # Weapons are also counted as abilities
   def add_weapon(self, weapon):
+    '''Adds a weapon to the hero's list of abilities'''
     self.abilities.append(weapon)
 
+  def add_armour(self, armour):
+    '''Adds a piece or armour to the hero's list of armour'''
+    self.armour.append(armour)
 
   def attack(self):
+    '''Calculates and returns the total damage caused by the sum of the hero's abilities'''
     total_damage = 0
     for ability in self.abilities:
       total_damage += ability.attack()
     return total_damage
 
-  def add_armour(self, armour):
-    self.armour.append(armour)
-
   def defend(self):
+    '''Calculates and returns the total block produced by the sum of the hero's armour'''
     total_block = 0
     if len(self.armour) > 0 and self.current_health > 0:  
       for armour in self.armour:
@@ -38,18 +45,24 @@ class Hero:
     return total_block
 
   def take_damage(self, damage):
+    '''If the damage is greater than the defence, subtracts the net damage from the current health'''
     defence = self.defend()
-    # If the damage is greater than the defence, subtract the net damage from current health
     if damage > defence:
       self.current_health -= damage - defence
 
   def is_alive(self):
+    '''Checks the current health to see if the hero is alive, and returns a boolean value'''
     if self.current_health > 0:
       return True
     else:
       return False
 
   def fight(self, opponent):
+    '''
+    Determines the outcome of a fight between a hero and an opponent in which
+    each fighter attacks the other and each fighter takes damage.  
+    Updates the kill and death statistics for each fighter.
+    '''
     if len(self.abilities) == 0 and len(opponent.abilities) == 0:
       print("Draw")
     else:
