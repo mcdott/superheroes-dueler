@@ -110,28 +110,33 @@ class Arena:
     print(self.average_kills_over_deaths(self.team_two))
     self.print_surviving_hero_list(self.team_one.name, self.team_one.heroes)
     self.print_surviving_hero_list(self.team_two.name, self.team_two.heroes)
-
+  
 if __name__ == "__main__":
-  game_is_running = True
 
-  # Instantiate Game Arena
-  arena = Arena()
+  def main():
+    '''Contains the game loop'''
+    game_is_running = True
 
-  #Build Teams
-  arena.build_team_one()
-  arena.build_team_two()
+    # Instantiate Game Arena
+    arena = Arena()
 
-  while game_is_running:
+    #Build Teams
+    arena.build_team_one()
+    arena.build_team_two()
 
-      arena.team_battle()
-      arena.show_stats()
-      play_again = input("Play Again? Y or N: ")
+    while game_is_running:
 
-      #Check for Player Input
-      if play_again.lower() == "n":
-          game_is_running = False
+        arena.team_battle()
+        arena.show_stats()
+        play_again = input("Play Again? Y or N: ")
 
-      else:
-          #Revive heroes to play again
-          arena.team_one.revive_heroes()
-          arena.team_two.revive_heroes()
+        #Check for Player Input
+        if play_again.lower() == "n":
+            game_is_running = False
+
+        else:
+            #Revive heroes to play again
+            arena.team_one.revive_heroes()
+            arena.team_two.revive_heroes()
+
+  main()

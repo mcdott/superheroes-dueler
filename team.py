@@ -1,11 +1,16 @@
 import random
 
 class Team:
+    '''
+    Contains methods to update and print the list of heroes on a team, 
+    and to battle against an opposing team 
+    '''
     def __init__(self, name):
         self.name = name
         self.heroes =list()
 
     def add_hero(self, hero):
+        '''Adds a hero to the list of heroes on the team'''
         self.heroes.append(hero)
 
     def remove_hero(self, name):
@@ -30,7 +35,7 @@ class Team:
             print(hero.name)
 
     def stats(self):
-        '''Print team statistics'''
+        '''Prints the team statistics'''
         for hero in self.heroes:
             if hero.deaths == 0:
                 kd = hero.kills
@@ -39,12 +44,12 @@ class Team:
             print(f"{hero.name} Kill/Deaths:{kd}")
 
     def revive_heroes(self, health=100):
-        ''' Reset all heroes health to starting_health'''
+        ''' Resets all heroes' health to starting_health'''
         for hero in self.heroes:
             hero.current_health = health
 
     def attack(self, other_team):
-        ''' Battle each team against each other.'''
+        ''' Battles a team against an opposing team'''
         living_heroes = list()
         living_opponents = list()
 

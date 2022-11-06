@@ -1,12 +1,13 @@
 import random
 
 class Ability:
+    '''Contains a method to return the value of damage caused by attacking with an abiltiy'''
     def __init__(self, name, max_damage):
         self.name = name
         self.max_damage = max_damage
 
     def attack(self):
-        # An ability's damage is a random number between 0 and its max damage
+        '''Calculates an ability's damage as a random number between 0 and its max damage'''
         random_value = random.randint(0, self.max_damage)
         return random_value
 
